@@ -13,7 +13,9 @@ import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Data
 @AllArgsConstructor
@@ -32,6 +34,8 @@ public class Department {
 	private String name;
 	
 	//handson 5
+	@EqualsAndHashCode.Exclude
+	@ToString.Exclude
 	@OneToMany(mappedBy = "department")
 	//@OneToMany(mappedBy = "department", fetch = FetchType.EAGER)
 	private Set<Employee> employeeList;

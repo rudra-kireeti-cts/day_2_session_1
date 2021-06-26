@@ -19,7 +19,9 @@ import javax.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Data
 @AllArgsConstructor
@@ -52,7 +54,9 @@ public class Employee {
 	@JoinColumn(name = "em_dp_id")
 	private Department department;
 	
-	@ManyToMany
+	@EqualsAndHashCode.Exclude
+	@ToString.Exclude
+	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "employee_skill",
 	joinColumns = @JoinColumn(name = "es_em_id"),
 	inverseJoinColumns = @JoinColumn(name = "es_sk_id"))
