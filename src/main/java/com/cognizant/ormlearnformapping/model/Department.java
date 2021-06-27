@@ -27,16 +27,16 @@ public class Department {
 	// day 2 handson 3 declaring the variables, annotions and creating repo's
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="dp_id")
+	@Column(name = "dp_id")
 	private int id;
 
 	@Column(name = "dp_name")
 	private String name;
-	
-	//handson 5
+
+	// handson 5
 	@EqualsAndHashCode.Exclude
 	@ToString.Exclude
-	@OneToMany(mappedBy = "department")
-	//@OneToMany(mappedBy = "department", fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "department", fetch = FetchType.EAGER)
+	// @OneToMany(mappedBy = "department", fetch = FetchType.EAGER)
 	private Set<Employee> employeeList;
 }

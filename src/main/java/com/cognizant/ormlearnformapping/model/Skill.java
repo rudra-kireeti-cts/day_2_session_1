@@ -4,6 +4,7 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -29,8 +30,8 @@ public class Skill {
 
 	@Column(name = "sk_name")
 	private String name;
-	
-	//hand'son 6
-	@ManyToMany(mappedBy = "skillList")
+
+	// hand'son 6
+	@ManyToMany(mappedBy = "skillList", fetch = FetchType.EAGER)
 	private Set<Employee> employeeList;
 }

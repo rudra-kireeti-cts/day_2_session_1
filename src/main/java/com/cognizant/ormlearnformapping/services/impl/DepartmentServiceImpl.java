@@ -1,7 +1,5 @@
 package com.cognizant.ormlearnformapping.services.impl;
 
-
-
 import javax.transaction.Transactional;
 
 import org.slf4j.Logger;
@@ -16,12 +14,12 @@ import com.cognizant.ormlearnformapping.services.DepartmentService;
 @Service
 public class DepartmentServiceImpl implements DepartmentService {
 
-
 	private static final Logger LOGGER = LoggerFactory.getLogger(DepartmentServiceImpl.class);
-	
+
 	@Autowired
 	public DepartmentRepository departmentRepository;
-	//handson 4
+
+	// handson 4
 	@Transactional
 	public Department getById(int id) {
 
@@ -29,8 +27,8 @@ public class DepartmentServiceImpl implements DepartmentService {
 
 		return departmentRepository.findById(id).get();
 	}
-	
-	//handson 4
+
+	// handson 4
 	@Transactional
 	public void save(Department department) {
 

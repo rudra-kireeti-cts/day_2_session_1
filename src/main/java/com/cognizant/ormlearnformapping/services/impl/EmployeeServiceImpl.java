@@ -1,5 +1,6 @@
 package com.cognizant.ormlearnformapping.services.impl;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.slf4j.Logger;
@@ -46,5 +47,33 @@ public class EmployeeServiceImpl implements EmployeeService {
 		LOGGER.info("save method in EmployeeService End");
 
 	}
+	
+	// day 2 session 2 handson 1
+	@Override
+	public List<Employee> getAll() {
+		// TODO Auto-generated method stub
+		return employeeRepository.getAllPermanentEmployees();
+	}
+	
+	// day 2 session 2 handson 4
+	@Override
+	public double getAverageSalary() {
+		// TODO Auto-generated method stub
+		return employeeRepository.getAverageSalary();
+	}
 
+	// session 2 hand'son 4
+	@Override
+	public double getAverageSalaryByDept(int id) {
+		// TODO Auto-generated method stub
+		return employeeRepository.getAverageSalary(id);
+	}
+
+	@Override
+	public List<Employee> getAllEmployeesNative() {
+		// TODO Auto-generated method stub
+		return employeeRepository.getAllEmployeesNative();
+	}
+	
+	
 }

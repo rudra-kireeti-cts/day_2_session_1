@@ -18,8 +18,8 @@ public class SkillServiceImpl implements SkillService {
 	private SkillRepository skillRepository;
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(SkillServiceImpl.class);
-	
-	//handson 4
+
+	// handson 4
 	@Transactional
 	public Skill getById(int id) {
 
@@ -28,7 +28,7 @@ public class SkillServiceImpl implements SkillService {
 		return skillRepository.findById(id).get();
 	}
 
-	//handson 4
+	// handson 4
 	@Transactional
 	public void save(Skill skill) {
 

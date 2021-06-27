@@ -1,7 +1,7 @@
 package com.cognizant.ormlearnformapping.model;
 
 import java.math.BigDecimal;
-import java.sql.Date;
+import java.util.Date;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -27,7 +27,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Entity(name = "employee")
+@Entity(name = "Employee")
 @Table(name = "employee", schema = "ormlearn")
 public class Employee {
 
@@ -48,18 +48,17 @@ public class Employee {
 
 	@Column(name = "em_date_of_birth")
 	private Date dateOfBirth;
-	
-	//handson 4
+
+	// handson 4
+
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "em_dp_id")
 	private Department department;
-	
+
 	@EqualsAndHashCode.Exclude
 	@ToString.Exclude
 	@ManyToMany(fetch = FetchType.EAGER)
-	@JoinTable(name = "employee_skill",
-	joinColumns = @JoinColumn(name = "es_em_id"),
-	inverseJoinColumns = @JoinColumn(name = "es_sk_id"))
+	@JoinTable(name = "employee_skill", joinColumns = @JoinColumn(name = "es_em_id"), inverseJoinColumns = @JoinColumn(name = "es_sk_id"))
 	private Set<Skill> skillList;
 
 }
