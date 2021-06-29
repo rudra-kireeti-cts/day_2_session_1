@@ -5,137 +5,237 @@ import java.util.Date;
 import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.Bean;
+
 import com.cognizant.ormlearnformapping.model.Department;
 import com.cognizant.ormlearnformapping.model.Employee;
 import com.cognizant.ormlearnformapping.model.Skill;
+import com.cognizant.ormlearnformapping.model.Stock;
 import com.cognizant.ormlearnformapping.services.DepartmentService;
 import com.cognizant.ormlearnformapping.services.EmployeeService;
 import com.cognizant.ormlearnformapping.services.SkillService;
+import com.cognizant.ormlearnformapping.services.StockService;
 
 @SpringBootApplication
 public class OrmlearnformappingApplication {
 	private static final Logger LOGGER = LoggerFactory.getLogger(OrmlearnformappingApplication.class);
 
-	private static EmployeeService employeeService;
-	private static DepartmentService departmentService;
-	private static SkillService skillService;
+	@Autowired
+	StockService stockService;
+	@Autowired
+	EmployeeService employeeService;
+	@Autowired
+	DepartmentService departmentService;
+	@Autowired
+	SkillService skillService;
 
 	public static void main(String[] args) {
 		ApplicationContext context = SpringApplication.run(OrmlearnformappingApplication.class, args);
-		employeeService = context.getBean(EmployeeService.class);
-		departmentService = context.getBean(DepartmentService.class);
-		skillService = context.getBean(SkillService.class);
-		// testGetEmployee();
-		// testAddEmployee();
-		// testUpdateEmployee();
-		// testGetDepartment();
-		// testAddSkillToEmployee();
-		// getAllPermanent();
-		// getAverageSalary();
-		// getAverageSalaryByDept();
-		usingNative();
+
 	}
 
-	private static void testGetEmployee() {
+	// session 2 hand'son 2
+	@Bean
+	CommandLineRunner testGetAllStocks() {
+		return arg -> {
+			LOGGER.info("START  testGetAllStocks");
+			List<Stock> stocks = stockService.getAllStocks();
+			LOGGER.debug("stocks = {}", stocks);
+			LOGGER.info("END testGetAllStocks");
+		};
+	}
 
-		LOGGER.info("Start testGetEmployee");
+	// session 2 hand'son 2
+	@Bean
+	CommandLineRunner testGetStocksOfFBInSep2019() {
+		return arg -> {
+			LOGGER.info("START testGetStocksOfFBInSep2019");
+			List<Stock> stocks = stockService.getStocksOfFBInSep2019();
+			for (Stock stock : stocks) {
+				LOGGER.debug("stocks = {}", stock);
+			}
+			LOGGER.info("END testGetStocksOfFBInSep2019");
+		};
+	}
 
-		Employee employee = employeeService.getById(1);
-		LOGGER.debug("Employee:{}", employee);
-		LOGGER.debug("Department:{}", employee.getDepartment());
-		LOGGER.debug("Skills:{}", employee.getSkillList());
+	// session 2 hand'son 2
+	@Bean
+	CommandLineRunner testGetStocksOfGoogleGT1250() {
+		return arg -> {
+			LOGGER.info("START testGetStocksOfGoogleGT1250");
+			List<Stock> stocks = stockService.getStocksOfGoogleGT1250();
+			for (Stock stock : stocks) {
+				LOGGER.debug("stocks = {}", stock);
+			}
+			LOGGER.info("END testGetStocksOfGoogleGT1250");
+		};
+	}
 
-		LOGGER.info("End testGetEmployee");
+	// session 2 hand'son 2
+	@Bean
+	CommandLineRunner testGetTop3StocksByVolume() {
+		return arg -> {
+			LOGGER.info("START testGetTop3StocksByVolume");
+			List<Stock> stocks = stockService.getTop3StocksByVolume();
+			for (Stock stock : stocks) {
+				LOGGER.debug("stocks = {}", stock);
+			}
+			LOGGER.info("END testGetTop3StocksByVolume");
+		};
+	}
+
+	// session 2 hand'son 2
+	@Bean
+	CommandLineRunner test3LowestNetflixStocks() {
+		return arg -> {
+			LOGGER.info("START test3LowestNetflixStocks");
+			List<Stock> stocks = stockService.get3LowestNetflixStocks();
+			for (Stock stock : stocks) {
+				LOGGER.debug("stocks = {}", stock);
+			}
+			LOGGER.info("END test3LowestNetflixStocks");
+		};
+	}
+
+	// session 2 hand'son 2
+	@Bean
+	CommandLineRunner testGetEmployee() {
+		return arg -> {
+
+			LOGGER.info("Start testGetEmployee");
+
+			Employee employee = employeeService.getById(1);
+			LOGGER.debug("Employee:{}", employee);
+			LOGGER.debug("Department:{}", employee.getDepartment());
+			LOGGER.debug("Skills:{}", employee.getSkillList());
+
+			LOGGER.info("End testGetEmployee");
+		};
 
 	}
 
 	// handson 4
-	private static void testAddEmployee() {
-		LOGGER.info("Start testAddEmployee");
+	@Bean
+	CommandLineRunner testAddEmployee() {
+		return arg -> {
 
-		Department department = departmentService.getById(1);
-		Employee employee = Employee.builder().name("kireeti").salary(BigDecimal.valueOf(30000)).permanent(true)
-				.dateOfBirth(new Date(2021, 03, 23)).department(department).build();
-		employeeService.save(employee);
+			LOGGER.info("Start testAddEmployee");
 
-		LOGGER.info("End testAddEmployee");
+			Department department = departmentService.getById(1);
+			Employee employee = Employee.builder().name("kireeti").salary(BigDecimal.valueOf(30000)).permanent(true)
+					.dateOfBirth(new Date(2021, 03, 23)).department(department).build();
+			employeeService.save(employee);
+
+			LOGGER.info("End testAddEmployee");
+		};
 	}
 
 	// handson 4
-	private static void testUpdateEmployee() {
+	@Bean
+	CommandLineRunner testUpdateEmployee() {
 
 		LOGGER.info("Start testUpdateEmployee");
 
-		Employee employee = employeeService.getById(1);
-		Department department = departmentService.getById(2);
-		employee.setDepartment(department);
-		employeeService.save(employee);
+		return arg -> {
 
-		LOGGER.info("End testUpdateEmployee");
+			Employee employee = employeeService.getById(1);
+			Department department = departmentService.getById(2);
+			employee.setDepartment(department);
+			employeeService.save(employee);
+
+			LOGGER.info("End testUpdateEmployee");
+		};
 	}
 
 	// hand'son 5
-	private static void testGetDepartment() {
-		LOGGER.info("Start testGetDepartment");
+	@Bean
+	CommandLineRunner testGetDepartment() {
+		return arg -> {
 
-		Department department = departmentService.getById(3);
-		department.getEmployeeList().forEach(emp -> System.out.println(emp));
+			LOGGER.info("Start testGetDepartment");
 
-		LOGGER.info("End testGetDepartment");
+			Department department = departmentService.getById(3);
+			department.getEmployeeList().forEach(emp -> System.out.println(emp));
+
+			LOGGER.info("End testGetDepartment");
+		};
 	}
 
 	// hand'son 6
-	private static void testAddSkillToEmployee() {
-		LOGGER.info("Start testAddSkillToEmployee");
+	@Bean
+	CommandLineRunner testAddSkillToEmployee() {
+		return arg -> {
 
-		Employee employee = employeeService.getById(1);
-		Skill skill = skillService.getById(2);
-		employee.getSkillList().add(skill);
-		employeeService.save(employee);
+			LOGGER.info("Start testAddSkillToEmployee");
 
-		LOGGER.info("End testAddSkillToEmployee");
+			Employee employee = employeeService.getById(1);
+			Skill skill = skillService.getById(2);
+			employee.getSkillList().add(skill);
+			employeeService.save(employee);
+
+			LOGGER.info("End testAddSkillToEmployee");
+		};
 	}
 
 	// sesson2 hand'son 1
-	private static void getAllPermanent() {
-		LOGGER.info("Start getAllPermanent");
+	@Bean
+	CommandLineRunner getAllPermanent() {
+		return arg -> {
 
-		List<Employee> all = employeeService.getAll();
-		LOGGER.debug("{}", all);
+			LOGGER.info("Start getAllPermanent");
 
-		LOGGER.info("End getAllPermanent");
+			List<Employee> all = employeeService.getAll();
+			LOGGER.debug("{}", all);
+
+			LOGGER.info("End getAllPermanent");
+		};
 	}
 
 	// session 2 hand'son 4
-	private static void getAverageSalary() {
-		LOGGER.info("Start getAverageSalary");
+	@Bean
+	CommandLineRunner getAverageSalary() {
+		return arg -> {
+			LOGGER.info("Start getAverageSalary");
 
-		double averageSalary = employeeService.getAverageSalary();
-		LOGGER.debug("{}", averageSalary);
+			double averageSalary = employeeService.getAverageSalary();
+			LOGGER.debug("{}", averageSalary);
 
-		LOGGER.info("End getAverageSalary");
+			LOGGER.info("End getAverageSalary");
+
+		};
 	}
 
 	// session 2 hand'son 4
-	private static void getAverageSalaryByDept() {
-		LOGGER.info("Start getAverageSalary");
+	@Bean
+	CommandLineRunner getAverageSalaryByDept() {
+		return arg -> {
+			LOGGER.info("Start getAverageSalary");
 
-		double averageSalary = employeeService.getAverageSalaryByDept(3);
-		LOGGER.debug("{}", averageSalary);
+			double averageSalary = employeeService.getAverageSalaryByDept(3);
+			LOGGER.debug("{}", averageSalary);
 
-		LOGGER.info("End getAverageSalary");
+			LOGGER.info("End getAverageSalary");
+
+		};
 	}
+
 	// session 2 hand'son 5
-	private static void usingNative(){
-		LOGGER.info("Start usingNative");
-		
-		  List<Employee> allEmployeesNative = employeeService.getAllEmployeesNative();
-		LOGGER.debug("{}", allEmployeesNative);
-		
-		LOGGER.info("End usingNative");
+	@Bean
+	CommandLineRunner usingNative() {
+		return arg -> {
+			LOGGER.info("Start usingNative");
+
+			List<Employee> allEmployeesNative = employeeService.getAllEmployeesNative();
+			LOGGER.debug("{}", allEmployeesNative);
+
+			LOGGER.info("End usingNative");
+
+		};
 	}
 
 }
