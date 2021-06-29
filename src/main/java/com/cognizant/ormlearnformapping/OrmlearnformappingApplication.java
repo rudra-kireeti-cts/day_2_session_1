@@ -66,7 +66,7 @@ public class OrmlearnformappingApplication {
 	// session 2 hand'son 2
 	@Bean
 	CommandLineRunner testGetStocksOfGoogleGT1250() {
-		return test -> {
+		return result -> {
 			LOGGER.info("START testGetStocksOfGoogleGT1250");
 			List<Stock> stocks = stockService.getStocksOfGoogleGT1250();
 			for (Stock stock : stocks) {
@@ -79,7 +79,7 @@ public class OrmlearnformappingApplication {
 	// session 2 hand'son 2
 	@Bean
 	CommandLineRunner testGetTop3StocksByVolume() {
-		return test -> {
+		return result -> {
 			LOGGER.info("START testGetTop3StocksByVolume");
 			List<Stock> stocks = stockService.getTop3StocksByVolume();
 			for (Stock stock : stocks) {
@@ -92,7 +92,7 @@ public class OrmlearnformappingApplication {
 	// session 2 hand'son 2
 	@Bean
 	CommandLineRunner test3LowestNetflixStocks() {
-		return test -> {
+		return result -> {
 			LOGGER.info("START test3LowestNetflixStocks");
 			List<Stock> stocks = stockService.get3LowestNetflixStocks();
 			for (Stock stock : stocks) {
@@ -105,7 +105,7 @@ public class OrmlearnformappingApplication {
 	// session 2 hand'son 2
 	@Bean
 	CommandLineRunner testGetEmployee() {
-		return test -> {
+		return result -> {
 
 			LOGGER.info("Start testGetEmployee");
 
@@ -122,7 +122,7 @@ public class OrmlearnformappingApplication {
 	// handson 4
 	@Bean
 	CommandLineRunner testAddEmployee() {
-		return test -> {
+		return result -> {
 
 			LOGGER.info("Start testAddEmployee");
 
@@ -139,7 +139,7 @@ public class OrmlearnformappingApplication {
 	@Bean
 	CommandLineRunner testUpdateEmployee() {
 
-		return test -> {
+		return result -> {
 			LOGGER.info("Start testUpdateEmployee");
 
 			Employee employee = employeeService.getById(1);
@@ -154,7 +154,7 @@ public class OrmlearnformappingApplication {
 	// hand'son 5
 	@Bean
 	CommandLineRunner testGetDepartment() {
-		return test -> {
+		return result -> {
 
 			LOGGER.info("Start testGetDepartment");
 
@@ -168,7 +168,7 @@ public class OrmlearnformappingApplication {
 	// hand'son 6
 	@Bean
 	CommandLineRunner testAddSkillToEmployee() {
-		return test -> {
+		return result -> {
 
 			LOGGER.info("Start testAddSkillToEmployee");
 
@@ -184,7 +184,7 @@ public class OrmlearnformappingApplication {
 	// sesson2 hand'son 1
 	@Bean
 	CommandLineRunner getAllPermanent() {
-		return test -> {
+		return result -> {
 
 			LOGGER.info("Start getAllPermanent");
 
@@ -198,7 +198,7 @@ public class OrmlearnformappingApplication {
 	// session 2 hand'son 4
 	@Bean
 	CommandLineRunner getAverageSalary() {
-		return test -> {
+		return result -> {
 			LOGGER.info("Start getAverageSalary");
 
 			double averageSalary = employeeService.getAverageSalary();
@@ -212,7 +212,7 @@ public class OrmlearnformappingApplication {
 	// session 2 hand'son 4
 	@Bean
 	CommandLineRunner getAverageSalaryByDept() {
-		return test -> {
+		return result -> {
 			LOGGER.info("Start getAverageSalary");
 
 			double averageSalary = employeeService.getAverageSalaryByDept(3);
@@ -226,7 +226,7 @@ public class OrmlearnformappingApplication {
 	// session 2 hand'son 5
 	@Bean
 	CommandLineRunner usingNative() {
-		return test -> {
+		return result -> {
 			LOGGER.info("Start usingNative");
 
 			List<Employee> allEmployeesNative = employeeService.getAllEmployeesNative();
