@@ -42,7 +42,7 @@ public class OrmlearnformappingApplication {
 	// session 2 hand'son 2
 	@Bean
 	CommandLineRunner testGetAllStocks() {
-		return test -> {
+		return result -> {
 			LOGGER.info("START  testGetAllStocks");
 			List<Stock> stocks = stockService.getAllStocks();
 			LOGGER.debug("stocks = {}", stocks);
@@ -53,7 +53,7 @@ public class OrmlearnformappingApplication {
 	// session 2 hand'son 2
 	@Bean
 	CommandLineRunner testGetStocksOfFBInSep2019() {
-		return test -> {
+		return result -> {
 			LOGGER.info("START testGetStocksOfFBInSep2019");
 			List<Stock> stocks = stockService.getStocksOfFBInSep2019();
 			for (Stock stock : stocks) {
